@@ -1,0 +1,1 @@
+A web-app with auth features, a db of lab information filled from a .csv file, a list of the labs along with an admin panel with a map drop point for every lab.
