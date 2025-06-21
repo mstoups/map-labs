@@ -70,7 +70,8 @@ Route::middleware(['auth'])->group(function () {
         @endif
       </div>
     </div>
-    
+
+    // Query for the labs.
     <form method="GET" action="{{ route('labs.index') }}" class="mb-3">
       <div class="input-group">
         <input type="text" name="search" class="form-control" placeholder="Search labs..." value="{{ request()->input('search') }}">
@@ -79,7 +80,9 @@ Route::middleware(['auth'])->group(function () {
         </div>
       </div>
     </form>
-    
+
+
+    // Basic display.
     <div class="lab-container">
       @forelse($labs as $lab)
         <div class="lab-item">
@@ -109,7 +112,8 @@ Route::middleware(['auth'])->group(function () {
    public function index(Request $request)
     {
         $query = Lab::query();
-        
+
+        // Checks if a search prompt exists.
         if ($request->has('search') && $request->input('search') !== '') {
             $search = $request->input('search');
             // Assume searching by title
@@ -121,6 +125,7 @@ Route::middleware(['auth'])->group(function () {
         return view('labs.index', compact('labs'));
     }
 
+    // Creates the lab.
     public function store(Request $request)
     {
         Lab::create($request->validate([
@@ -164,4 +169,4 @@ Route::middleware(['auth'])->group(function () {
         // Redirect to labs
         return redirect()->route('login')->with('success', 'Registration successful! You are now logged in.');
     }
-*/ // Handles user registration, including validation and user creation, and redirects to the login page upon success.
+*/ // Handles user registration, and redirects to the login page upon success.
